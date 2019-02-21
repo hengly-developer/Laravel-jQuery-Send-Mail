@@ -8,7 +8,7 @@ composer global require laravel/installer
 
 ## Clone Project
 
-git clone 
+git clone git@git.sinet.com.kh:phearaeun/mail-marketing.git
 
 ## Copy .env from .env.example
 
