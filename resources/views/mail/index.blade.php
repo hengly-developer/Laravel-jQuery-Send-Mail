@@ -13,21 +13,18 @@
                             <div class="form-group row">
                                 <label for="subject" class="col-sm-2 col-form-label">To:</label>
                                 <div class="col-sm-12">
-                                        {{-- <i class="material-icons">close</i> --}}
                                     <input class="form-control"  type="email" id="email" name="email">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="subject" class="col-sm-2 col-form-label">CC:</label>
                                 <div class="col-sm-12">
-                                    {{-- <i class="material-icons">close</i> --}}
                                     <input class="form-control"  type="text" id="cc" name="cc">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="subject" class="col-sm-2 col-form-label">BCC:</label>
                                 <div class="col-sm-12">
-                                        {{-- <i class="material-icons">close</i> --}}
                                     <input class="form-control"  type="text" id="bcc" name="bcc">
                                 </div>
                             </div>
@@ -76,7 +73,7 @@
                 var subject = $('#subject').val();
                 var description = $('#description').val();
 
-                /*----Validation----*/
+                /*----Validation Email----*/
                 var isValid = true;
                 $('#email').each(function () {
                     if ($.trim($(this).val()) == '') {
@@ -110,6 +107,11 @@
                     },
                     success: function () {
                         alert('Successed...!');
+                        $('#email').val('');
+                        $('#cc').val('');
+                        $('#bcc').val('');
+                        $('#subject').val('');
+                        $('#description').val('');
                     },
                     error: function ()
                     {	
@@ -117,109 +119,9 @@
                     }
                 });
             });
-
-            /*---HTML Tage---*/
-            const tagContainer = document.querySelector('.tag-container');
-            const input = document.querySelector('.tag-container input');
-
-            let tags = [];
-
-            function createTag(label) {
-                const div = document.createElement('div');
-                div.setAttribute('class', 'tag');
-                const span = document.createElement('span');
-                span.innerHTML = label;
-                const closeIcon = document.createElement('i');
-                closeIcon.innerHTML = 'close';
-                closeIcon.setAttribute('class', 'material-icons');
-                closeIcon.setAttribute('data-item', label);
-                div.appendChild(span);
-                div.appendChild(closeIcon);
-
-                return div;
-            }
-
-            function clearTags() {
-                document.querySelectorAll('.tag').forEach(tag => {
-                    tag.parentElement.removeChild(tag);
-                });
-            }
-
-            function addTags() {
-                clearTags();
-                tags.slice().reverse().forEach(tag => {
-                    tagContainer.prepend(createTag(tag));
-                });
-            }
-
-            input.addEventListener('keyup', (e) => {
-            if (e.key === 'Enter') {
-                e.target.value.split(',').forEach(tag => {
-                tags.push(tag);  
-                });
-                
-                addTags();
-                input.value = '';
-            }
-            });
-            document.addEventListener('click', (e) => {
-                console.log(e.target.tagName);
-                if (e.target.tagName === 'I') {
-                    const tagLabel = e.target.getAttribute('data-item');
-                    const index = tags.indexOf(tagLabel);
-                    tags = [...tags.slice(0, index), ...tags.slice(index+1)];
-                    addTags();    
-                }
-            })
        });
        
     </script>
    
-@endsection
-@section('css')
-<style>
-        @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
-        body {
-            background: #fafafa;
-        }
-        .tag-container {
-            // border: 2px solid #ccc;
-            // border-radius: 3px;
-            background: #FFFFFF;
-            display: flex;
-            // flex-wrap: wrap;
-            // align-content: flex-start;
-            // padding: 6px;
-            // overflow-x: scroll;
-            }
-            .tag-container .tag {
-                // height: 30px;
-                margin: 5px;
-                padding: 5px 6px;
-                // border: 1px solid #ccc;
-                border-radius: 3px;
-                background: #eee;
-                // display: flex;
-                align-items: center;
-                color: #333;
-                // box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 1px 1px #fff;
-                cursor: default;
-            }
-            .tag i {
-                font-size: 16px;
-                color: #666;
-                margin-left: 5px;
-            }
-            .tag-container input {
-                // padding: 5px;
-                // font-size: 16px;
-                // border: 0;
-                // outline: none;
-                // font-family: 'Rubik';
-                // color: #333;
-                // flex: 1;
-            }
-
-    </style>
 @endsection
 
