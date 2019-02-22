@@ -107,11 +107,11 @@
                     },
                     success: function () {
                         alert('Successed...!');
-                        $('#email').val('');
+                        /*$('#email').val('');
                         $('#cc').val('');
                         $('#bcc').val('');
                         $('#subject').val('');
-                        $('#description').val('');
+                        $('#description').val('');*/
                     },
                     error: function ()
                     {	

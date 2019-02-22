@@ -8,6 +8,8 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Http\Request;
 use App\User;
+use Redirect;
+
 
 class SendEmail extends Mailable
 {
@@ -36,6 +38,6 @@ class SendEmail extends Mailable
     {
         $e_subject = $request->subject;
         $e_description = $request->description;
-        return $this->view('mail.templates', compact('e_description'))->subject($e_subject, $e_description);
+        return $this->view('mail.index')->subject($e_subject, $e_description);
     }
 }
